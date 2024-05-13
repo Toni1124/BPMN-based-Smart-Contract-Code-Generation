@@ -1,5 +1,20 @@
 from ir_def import *
 
+def borrow_from_deployer(resource_name:str, member_var_name:str, mut:bool=False) -> str:
+    """ Borrow resource object from module deployer account """
+    res = "borrow_global"
+    if mut:
+        res += "_mut"
+    res += f'<{resource_name}>(@deployer).{member_var_name}'
+
+    if current_func_name in func_acquires:
+        if resource_name not in func_acquires[current_func_name]:
+            func_acquires[current_func_name].append(resource_name)
+    else:
+        func_acquires[current_func_name] = [resource_name]
+
+    return res
+
 def trans_DefStructAST(obj : DefStructAST, indent: str) -> str:
     var_list = []
     res = f'{indent}struct {obj.identifier} '
@@ -37,7 +52,7 @@ def trans_ArrOperationAST(obj : ArrOperationAST, indent: str) -> str:
     if obj.operation == 'push':
         res += f'vector::push_back<{obj.obj.type}>'
         res += f'(&mut {borrow_from_deployer(resource_name, obj.identifier, True)}, '
-        res += f'{obj.obj.move_ver("")}'
+        res += f'{move_translate(obj.obj, "")}'
         res = res[:-1]
         res += ');\n'
 
@@ -81,7 +96,7 @@ def trans_DeclLocalVarAST(obj : DeclLocalVarAST, indent: str) -> str:
             else:
                 res += f' = {obj.expr}'
     else:
-        res += f' = {obj.expr.move_ver("")}'
+        res += f' = {move_translate(obj.expr, "")}'
     res += ';\n'
 
     return res
@@ -156,7 +171,7 @@ def trans_AssignAST(obj : AssignAST, indent: str) -> str:
         if isinstance(obj.expr, str):
             res += obj.expr
         else:
-            res += f'{obj.expr.move_ver("")}'
+            res += f'{move_translate(obj.expr, "")}'
         res += ';\n'
 
     return res
@@ -183,13 +198,13 @@ def trans_BitwiseOpAST(obj : BitwiseOpAST, indent: str) -> str:
         if isinstance(obj.right_expr, str):
             res += obj.right_expr
         else:
-            res += f'({obj.right_expr.move_ver("")})'
+            res += f'({move_translate(obj.right_expr, "")})'
         res += f' {obj.operator} '
 
     if isinstance(obj.left_expr, str):
         res += obj.left_expr
     else:
-        res += f'({obj.left_expr.move_ver("")})'
+        res += f'({move_translate(obj.left_expr, "")})'
     return res
 
 
@@ -226,7 +241,7 @@ def trans_BoolExprAST(obj : BoolExprAST, indent: str) -> str:
                 res = res[:len(indent)] + '*' + res[len(indent):]
 
     else:
-        res += obj.left_expr.move_ver(indent)
+        res += move_translate(obj.left_expr, indent)
 
     if obj.operator is not None:
         res += ' ' + obj.operator
@@ -238,14 +253,14 @@ def trans_BoolExprAST(obj : BoolExprAST, indent: str) -> str:
         else:
             res += ' ' + obj.right_expr
     elif obj.right_expr is not None:
-        res += ' ' + obj.right_expr.move_ver(indent)
+        res += ' ' + move_translate(obj.right_expr, indent)
     
     return res
 
 
 def trans_RequireAST(obj : RequireAST, indent: str) -> str:
     res = f"{indent}assert!("
-    res += obj.bool_expression.move_ver("")
+    res += move_translate(obj.bool_expression, "")
     res += ", 0);\n"
 
     return res
@@ -256,12 +271,12 @@ def trans_IfAST(obj : IfAST, indent: str) -> str:
     for cond, stmts in obj.cond_stmt.items():
         if cond is not None:
             res += f"{indent}if ("
-            res += cond.move_ver("")
+            res += move_translate(cond, "")
             res += ") {\n"
 
             for stmt in stmts:
                 if stmt is not None:
-                    res += stmt.move_ver(indent + "    ")
+                    res += move_translate(stmt, indent + "    ")
 
             res += f"{indent}}}"
             if None in obj.cond_stmt:
@@ -273,7 +288,7 @@ def trans_IfAST(obj : IfAST, indent: str) -> str:
         res += f"{indent}else {{\n"
 
         for stmt in obj.cond_stmt[None]:
-            res += stmt.move_ver(indent + "    ")
+            res += move_translate(stmt, indent + "    ")
 
         res += f"{indent}}};\n"
     
@@ -283,7 +298,7 @@ def trans_IfAST(obj : IfAST, indent: str) -> str:
 def trans_WhileAST(obj : WhileAST, indent: str) -> str:
     res = f"{indent}loop {{\n"
     for stmt in obj.stmt:
-        res += stmt.move_ver(indent + "    ")
+        res += move_translate(stmt, indent + "    ")
     res += f"{indent}}};\n"
 
     return res
@@ -375,7 +390,7 @@ def trans_FuncCallAST(obj : FuncCallAST, indent: str) -> str:
             else:
                 res += arg
         else:
-            code = arg.move_ver("")
+            code = move_translate(arg, "")
             res += code[:-1] if code.endswith(';') else code
 
     res += ");\n"
@@ -445,7 +460,7 @@ def trans_FuncDefAST(obj : FuncDefAST, indent: str) -> str:
                     struct_instance = InstantiateAST(var[1])
                     for sub_var in struct_structure_map[var[1]]:
                         struct_instance.add_arg(initial_values[sub_var[1]])
-                    res += f'{var[0]}: {struct_instance.move_ver("")[:-1]}, '
+                    res += f'{var[0]}: {move_translate(struct_instance, "")[:-1]}, '
             res += '});\n'
     else:
         if obj.visibility in ("public", "external"):
@@ -471,7 +486,7 @@ def trans_FuncDefAST(obj : FuncDefAST, indent: str) -> str:
     func_signature_map[obj.identifier] = param_list
 
     for stmt in obj.func_body:
-        res += stmt.move_ver(indent + "    ")
+        res += move_translate(stmt, indent + "    ")
     res += f"{indent}}}\n"
 
     acquires_stmt = ""
@@ -512,20 +527,18 @@ def trans_ContractAST(obj : ContractAST, indent: str) -> str:
     res += '    use aptos_std::simple_map;\n'
     res += '    use aptos_framework::event;\n\n'
     for struct in obj.struct_list:
-        res += struct.move_ver(indent + "    ")
+        res += move_translate(struct, indent + "    ")
     res += "\n"
     for var in obj.var_list:
-        res += var.move_ver(indent + "    ")
+        res += move_translate(var, indent + "    ")
     res += "\n"
     for event in obj.event_list:
-        res += event.move_ver(indent + "    ")
+        res += move_translate(event, indent + "    ")
     res += "\n"
     for code in obj.code_snippet_list:
-        res += code.move_ver(indent + "    ")
+        res += move_translate(code, indent + "    ")
     res += "\n"
 
-    # 实际顺序：init, start_execution, xxxx_complete, step, xxxx_start, xxxx
-    # 理想顺序：init, xxxx_start, step, start_execution, xxxx_complete, xxxx
     complete_idx, complete_len = 0, 0
     start_idx, start_len = 0, 0
     for idx, func in enumerate(obj.func_list):
@@ -548,7 +561,7 @@ def trans_ContractAST(obj : ContractAST, indent: str) -> str:
     assert(len(sorted_func_list) == len(obj.func_list))
 
     for func in sorted_func_list:
-        res += func.move_ver(indent + "    ")
+        res += move_translate(func, indent + "    ")
         res += "\n"
     res += "}\n"
     return res
@@ -558,7 +571,7 @@ def trans_ProgramAST(obj : ProgramAST) -> str:
     obj.code = ''
     res = obj.code
     for contract in obj.contract_list:
-        res += contract.move_ver("")
+        res += move_translate(contract, "")
         res += "\n"
     
     return res

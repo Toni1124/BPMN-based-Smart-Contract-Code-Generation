@@ -1,6 +1,5 @@
 import json
 from typing import Union, Dict
-import antlr4
 import os
 
 from ir_def import *
@@ -9,7 +8,14 @@ from utils.load_json import load_json
 from translators.solidity_translator import sol_translate
 from translators.move_translator import move_translate
 
-ALL_EVENTS = True  # 用于控制是否给执行完每一个bpmn块都报出一个event，用于前端同步进度
+#################################################
+#   Front End
+#   1. Extract BPMN Information
+#################################################
+
+
+
+ALL_EVENTS = True  # 用于控制是否给执行完每一个bpmn块都报出一个event
 name_to_super = load_json()
 
 globalNodeMap: Dict[str, Any] = {}
@@ -559,6 +565,11 @@ def get_worklist_param(controlFlowInfo, parameterInfo, node_id, isInput, hasType
     return res
 
 
+#################################################
+#   Front End
+#   2. Construct IR
+#################################################
+
 def convert_one(controlFlowInfo, filename, lang, save_as_sol):
     """ Convert BPMN to Intermediate Representation """
 
@@ -821,8 +832,6 @@ def convert_one(controlFlowInfo, filename, lang, save_as_sol):
             elif is_instance(node['$type'], 'bpmn:SendTask'):
                 emit_event = EmitEventAST(f'{node_id}_Message_{node["name"]}')
                 for arg in controlFlowInfo.localParameters[node_id]['input']:
-                    # event_arg = '_' + arg.name
-                    # emit_event.add_arg(f'"{event_arg}"')
                     emit_event.add_arg('_' + arg.name)
                 if_ast.cond_stmt[bool_expr].append(emit_event)
 
@@ -1081,34 +1090,36 @@ def convert_one(controlFlowInfo, filename, lang, save_as_sol):
             ArrOperationAST('workitems', 'set', '(workitemId as u64)', 'operated', 'true')
         )
         process_contract.add2list(func)
+        
 
-
+    #################################################
+    #   Back End
+    #   Generate target code based on IR
+    #################################################
+    
     if save_as_sol:
         assert(lang in ('solidity', 'move'))
         if lang == 'solidity':
-            # program_code = program_ast.solidity_ver()
             program_code = sol_translate(program_ast, "")
         elif lang == 'move':
-            program_code = program_ast.move_ver()
+            program_code = move_translate(program_ast, "")
         else:
             assert(False)
         current_dir = os.path.dirname(os.path.abspath(__file__))
         if lang == 'solidity':
-            output_path = f'./outputs/test/{filename}.sol'
+            output_path = f'./outputs/solidity/{filename}.sol'
         elif lang == 'move':
             output_path = f'./outputs/move/{filename}.move'
 
         abs_path = os.path.join(current_dir, output_path)
         with open(abs_path, 'w') as f:
             f.write(program_code)
-        # print(program_code)
 
 
 def convert_bpmn_to_sol(proc, filename, lang, save_as_sol):
     globalNodeMap[proc["id"]] = proc
     collect_control_flow_info(proc, globalNodeMap, globalControlFlowInfo)
 
-    # 若不考虑子进程调用，则通常只有一个controlFlowInfo
     for controlFlowInfo in globalControlFlowInfo:
         globalControlFlowInfoMap[controlFlowInfo.proc['id']] = controlFlowInfo
 
