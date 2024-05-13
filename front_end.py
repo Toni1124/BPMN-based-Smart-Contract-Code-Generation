@@ -6,6 +6,8 @@ import os
 from ir_def import *
 from definitions import *
 from utils.load_json import load_json
+from translators.solidity_translator import sol_translate
+from translators.move_translator import move_translate
 
 ALL_EVENTS = True  # 用于控制是否给执行完每一个bpmn块都报出一个event，用于前端同步进度
 name_to_super = load_json()
@@ -216,15 +218,6 @@ def get_throwing_messages(controlFlowInfo):
                 is_instance(node['eventDefinitions'][0]['$type'], "bpmn:MessageEventDefinition")):
             res.append(node_id)
     return res
-
-
-def authGlobal(controlFlowInfo):
-    """ Generate global auth code """
-    if len(controlFlowInfo.authGlobal):
-        initializeCode, _, constantfunction = get_role_three_part(controlFlowInfo.authGlobal)
-        return initializeCode, constantfunction
-    else:
-        return None, None
 
 
 def globalDeclarations(controlFlowInfo, contract:ContractAST) -> list:
@@ -947,7 +940,6 @@ def convert_one(controlFlowInfo, filename, lang, save_as_sol):
     program_ast.contract_list.append(process_contract)
 
 
-
     userTaskList = {}       # node that need to interact with external resources
     parameterInfo = {}      # dict[node_id] = input/output Parameter
     for node_id in controlFlowInfo.nodeList:
@@ -961,14 +953,6 @@ def convert_one(controlFlowInfo, filename, lang, save_as_sol):
                      len(controlFlowInfo.localParameters.get(node_id).get('output'))):
                 parameterInfo[node_id] = controlFlowInfo.localParameters.get(node_id)
 
-    initializeCode, constantfunction = authGlobal(controlFlowInfo)
-
-    if initializeCode is not None:
-        
-        if initializeCode not in ("", "\n", ";"):
-            constructor_func.set_funcbody(CodeSnippetAST(initializeCode))
-        if constantfunction not in ("", "\n", ";"):
-            process_contract.add2list(CodeSnippetAST(constantfunction))
 
     struct_def = DefStructAST("Workitem")
     struct_def.ability_list.append("store")
@@ -1069,15 +1053,6 @@ def convert_one(controlFlowInfo, filename, lang, save_as_sol):
 
         node = globalNodeMap.get(node_id)
 
-        if 'auth' in node:
-            _, role_code, _ = get_role_three_part(node['auth'])
-            if role_code not in ("", "\n"):
-                func.set_funcbody(CodeSnippetAST(role_code))
-
-        if 'dslscript' in node:
-            _, role_code, _ = get_role_three_part(node['dslscript'])
-            if role_code not in ("", "\n"):
-                func.set_funcbody(CodeSnippetAST(role_code))
 
         func.set_funcbody(
             RequireAST(
@@ -1111,14 +1086,15 @@ def convert_one(controlFlowInfo, filename, lang, save_as_sol):
     if save_as_sol:
         assert(lang in ('solidity', 'move'))
         if lang == 'solidity':
-            program_code = program_ast.solidity_ver()
+            # program_code = program_ast.solidity_ver()
+            program_code = sol_translate(program_ast, "")
         elif lang == 'move':
             program_code = program_ast.move_ver()
         else:
             assert(False)
         current_dir = os.path.dirname(os.path.abspath(__file__))
         if lang == 'solidity':
-            output_path = f'./outputs/solidity/{filename}.sol'
+            output_path = f'./outputs/test/{filename}.sol'
         elif lang == 'move':
             output_path = f'./outputs/move/{filename}.move'
 

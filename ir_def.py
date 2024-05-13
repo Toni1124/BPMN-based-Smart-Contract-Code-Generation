@@ -503,7 +503,6 @@ class BoolExprAST:
         if self.operator is not None:
             res += ' ' + self.operator
 
-        # todo:需要处理map吗。。。
         if isinstance(self.right_expr, str):
             expr_name = self.right_expr.replace('_', '', 1).capitalize()
             if expr_name in resource_names:
@@ -1165,7 +1164,6 @@ class ProgramAST:
         self.code = '// SPDX-License-Identifier: MIT\n'
         self.code += 'pragma solidity ^0.8.0;\n'
         self.code += 'pragma abicoder v2;\n\n'
-        # self.code += 'import "node_modules/@openzeppelin/contracts/utils/Strings.sol";\n\n'
         res = self.code
         for contract in self.contract_list:
             res += contract.solidity_ver("")
@@ -1175,14 +1173,10 @@ class ProgramAST:
 
     def move_ver(self) -> str:
         """ Generate Solidity code """
-        # Generate Move Module
         self.code = ''
         res = self.code
         for contract in self.contract_list:
             res += contract.move_ver("")
             res += "\n"
-        # Generate Move Script
-        
-        # Generate Move.toml
         
         return res
