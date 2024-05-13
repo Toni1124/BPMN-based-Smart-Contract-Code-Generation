@@ -1,0 +1,420 @@
+{
+    "$type": "bpmn:Process",
+    "id": "null",
+    "name": "null",
+    "$parent": {
+        "$type": "bpmn:Definitions",
+        "id": "diagram_null"
+    },
+    "flowElements": [
+        {
+            "$type": "bpmn:StartEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_0j7zeil",
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_03dpuh7"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_03dpuh7",
+            "targetRef": {
+                "$type": "bpmn:ServiceTask",
+                "id": "Activity_1ki3swt",
+                "name": "Perform_Fraud_Check",
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_03iyxts"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:ServiceTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_1ki3swt",
+            "name": "Perform_Fraud_Check",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_03dpuh7"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1m48um8"
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_03iyxts",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_004q1dz",
+                        "name": "fraud_history",
+                        "dataType": "bool",
+                        "defaultValue": "false"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_004q1dz",
+            "name": "fraud_history",
+            "dataType": "bool",
+            "defaultValue": "false"
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_0whvid3"
+        },
+        {
+            "$type": "bpmn:ExclusiveGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_04z6kpv",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1m48um8"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_02ivipz",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "fraud_history==false"
+                    }
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0z116mf"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1m48um8",
+            "targetRef": {
+                "$type": "bpmn:ExclusiveGateway",
+                "id": "Gateway_04z6kpv"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_02ivipz",
+            "targetRef": {
+                "$type": "bpmn:ServiceTask",
+                "id": "Activity_15ynia4",
+                "name": "Get_Credit_Score",
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_1dd5lh7"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_0ewg9jz",
+            "name": "credit_score",
+            "dataType": "uint",
+            "defaultValue": "0"
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_0mbe9ia"
+        },
+        {
+            "$type": "bpmn:ExclusiveGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_1gc0mzu",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1v70fjl"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1v5zb8p",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "credit_score>=90"
+                    }
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0270nuv"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1v70fjl",
+            "targetRef": {
+                "$type": "bpmn:ExclusiveGateway",
+                "id": "Gateway_1gc0mzu"
+            }
+        },
+        {
+            "$type": "bpmn:ServiceTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_15ynia4",
+            "name": "Get_Credit_Score",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_02ivipz",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "fraud_history==false"
+                    }
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1v70fjl"
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_1dd5lh7",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_0ewg9jz",
+                        "name": "credit_score",
+                        "dataType": "uint",
+                        "defaultValue": "0"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1v5zb8p",
+            "targetRef": {
+                "$type": "bpmn:SendTask",
+                "id": "Activity_1blnahy",
+                "name": "Approve_Loan"
+            }
+        },
+        {
+            "$type": "bpmn:SendTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_1blnahy",
+            "name": "Approve_Loan",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1v5zb8p",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "credit_score>=90"
+                    }
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0hpo453"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:EndEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_06sr5v4",
+            "name": "Loan_Approved",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0hpo453"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0hpo453",
+            "targetRef": {
+                "$type": "bpmn:EndEvent",
+                "id": "Event_06sr5v4",
+                "name": "Loan_Approved"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0270nuv",
+            "targetRef": {
+                "$type": "bpmn:SendTask",
+                "id": "Activity_1hetxbf",
+                "name": "Deny_Loan"
+            }
+        },
+        {
+            "$type": "bpmn:SendTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_1hetxbf",
+            "name": "Deny_Loan",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0270nuv"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0z116mf"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1p4pddw"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:EndEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_17ki8gw",
+            "name": "Loan_Denied",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1p4pddw"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1p4pddw",
+            "targetRef": {
+                "$type": "bpmn:EndEvent",
+                "id": "Event_17ki8gw",
+                "name": "Loan_Denied"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0z116mf",
+            "targetRef": {
+                "$type": "bpmn:SendTask",
+                "id": "Activity_1hetxbf",
+                "name": "Deny_Loan"
+            }
+        }
+    ]
+}

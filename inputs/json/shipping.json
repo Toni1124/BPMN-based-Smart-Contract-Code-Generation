@@ -1,0 +1,1074 @@
+{
+    "$type": "bpmn:Process",
+    "id": "null",
+    "name": "null",
+    "$parent": {
+        "$type": "bpmn:Definitions",
+        "id": "diagram_null"
+    },
+    "flowElements": [
+        {
+            "$type": "bpmn:StartEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_0x02xy7",
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1835ulm"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_0v5c77r",
+            "name": "Initiate_shipping",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1835ulm"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_06c2os3"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1835ulm",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_0v5c77r",
+                "name": "Initiate_shipping"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_06c2os3",
+            "targetRef": {
+                "$type": "bpmn:ParallelGateway",
+                "id": "Gateway_00gpgwc"
+            }
+        },
+        {
+            "$type": "bpmn:ParallelGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_00gpgwc",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_06c2os3"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1p9n9iu"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_11rrwki"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_06ssggp"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1p9n9iu",
+            "targetRef": {
+                "$type": "bpmn:ServiceTask",
+                "id": "Activity_14ye2uu",
+                "name": "Outgoing_customs_procedures",
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_0bh6tju"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_0t3c564",
+            "name": "Prepare_products",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_11rrwki"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0z3pbc6"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_11rrwki",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_0t3c564",
+                "name": "Prepare_products"
+            }
+        },
+        {
+            "$type": "bpmn:ServiceTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_14ye2uu",
+            "name": "Outgoing_customs_procedures",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1p9n9iu"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1kq1ytq"
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_0bh6tju",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_0571bvr",
+                        "name": "customs_passed",
+                        "dataType": "bool"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:ServiceTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_1mdtd7d",
+            "name": "Book_for_shipmen",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_06ssggp"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_08u42fr"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_06ssggp",
+            "targetRef": {
+                "$type": "bpmn:ServiceTask",
+                "id": "Activity_1mdtd7d",
+                "name": "Book_for_shipmen"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_08u42fr",
+            "targetRef": {
+                "$type": "bpmn:ParallelGateway",
+                "id": "Gateway_1mhy99q"
+            }
+        },
+        {
+            "$type": "bpmn:ParallelGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_1mhy99q",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_08u42fr"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0qitc64"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0tcpsdu"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0z3pbc6",
+            "targetRef": {
+                "$type": "bpmn:ParallelGateway",
+                "id": "Gateway_0g0k9va"
+            }
+        },
+        {
+            "$type": "bpmn:ParallelGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_0g0k9va",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0z3pbc6"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1qjqwyy"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1bizfqk"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:Task",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_15w24qv",
+            "name": "Arrange_containers",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0tcpsdu"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0sv2571"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:ExclusiveGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_0qctgii",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0n3uyg4"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_16otij2"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1ob303m",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "warehouse_available == true"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:ServiceTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_090z4s4",
+            "name": "Check_warehouse_status",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0sv2571"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0n3uyg4"
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_0slxysb",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_1tmwb34",
+                        "name": "warehouse_available",
+                        "dataType": "bool"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_1tmwb34",
+            "name": "warehouse_available",
+            "dataType": "bool"
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0n3uyg4",
+            "targetRef": {
+                "$type": "bpmn:ExclusiveGateway",
+                "id": "Gateway_0qctgii"
+            }
+        },
+        {
+            "$type": "bpmn:Task",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_0ksu04d",
+            "name": "Store_in_depot",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_16otij2"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1misdf7",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "warehouse_available == true"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_16otij2",
+            "targetRef": {
+                "$type": "bpmn:Task",
+                "id": "Activity_0ksu04d",
+                "name": "Store_in_depot"
+            }
+        },
+        {
+            "$type": "bpmn:ExclusiveGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_02byf3s",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1ob303m",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "warehouse_available == true"
+                    }
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1misdf7",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "warehouse_available == true"
+                    }
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0k64x14"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1ob303m",
+            "targetRef": {
+                "$type": "bpmn:ExclusiveGateway",
+                "id": "Gateway_02byf3s"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1misdf7",
+            "targetRef": {
+                "$type": "bpmn:ExclusiveGateway",
+                "id": "Gateway_02byf3s"
+            }
+        },
+        {
+            "$type": "bpmn:IntermediateThrowEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_12ox46m",
+            "name": "Containers_ready",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0k64x14"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1qjqwyy"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0k64x14",
+            "targetRef": {
+                "$type": "bpmn:IntermediateThrowEvent",
+                "id": "Event_12ox46m",
+                "name": "Containers_ready"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1qjqwyy",
+            "targetRef": {
+                "$type": "bpmn:ParallelGateway",
+                "id": "Gateway_0g0k9va"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1bizfqk",
+            "targetRef": {
+                "$type": "bpmn:SendTask",
+                "id": "Activity_17kev5e",
+                "name": "Pack_products"
+            }
+        },
+        {
+            "$type": "bpmn:SendTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_17kev5e",
+            "name": "Pack_products",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1bizfqk"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_12yw1to"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1oteoyw",
+            "targetRef": {
+                "$type": "bpmn:ParallelGateway",
+                "id": "Gateway_114lea0"
+            }
+        },
+        {
+            "$type": "bpmn:ParallelGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_114lea0",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_024iquq"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1oteoyw",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "customs_passed == true"
+                    }
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_09dr393"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_0trcxgm",
+            "name": "Arrange_deliver_time",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0qitc64"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0wqj509"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0qitc64",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_0trcxgm",
+                "name": "Arrange_deliver_time"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0tcpsdu",
+            "targetRef": {
+                "$type": "bpmn:Task",
+                "id": "Activity_15w24qv",
+                "name": "Arrange_containers"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0sv2571",
+            "targetRef": {
+                "$type": "bpmn:ServiceTask",
+                "id": "Activity_090z4s4",
+                "name": "Check_warehouse_status",
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_0slxysb"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_12yw1to",
+            "targetRef": {
+                "$type": "bpmn:ParallelGateway",
+                "id": "Gateway_1mty1l6"
+            }
+        },
+        {
+            "$type": "bpmn:ParallelGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_1mty1l6",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_12yw1to"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0wqj509"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_024iquq"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0wqj509",
+            "targetRef": {
+                "$type": "bpmn:ParallelGateway",
+                "id": "Gateway_1mty1l6"
+            }
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_0ct4i4g"
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_024iquq",
+            "targetRef": {
+                "$type": "bpmn:ParallelGateway",
+                "id": "Gateway_114lea0"
+            }
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_0571bvr",
+            "name": "customs_passed",
+            "dataType": "bool"
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_1gktbbu"
+        },
+        {
+            "$type": "bpmn:EndEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_0os0wzu",
+            "name": "Shipment_failed",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0fby5zh"
+                }
+            ],
+            "eventDefinitions": [
+                {
+                    "$type": "bpmn:MessageEventDefinition",
+                    "id": "MessageEventDefinition_13lzn6n"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_09dr393",
+            "targetRef": {
+                "$type": "bpmn:IntermediateThrowEvent",
+                "id": "Event_1sooxn7",
+                "name": "Products_on_ship",
+                "eventDefinitions": [
+                    {
+                        "$type": "bpmn:MessageEventDefinition",
+                        "id": "MessageEventDefinition_1tgu7rx"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:IntermediateThrowEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_1sooxn7",
+            "name": "Products_on_ship",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_09dr393"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1myadr5"
+                }
+            ],
+            "eventDefinitions": [
+                {
+                    "$type": "bpmn:MessageEventDefinition",
+                    "id": "MessageEventDefinition_1tgu7rx"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:Task",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_1qb30d6",
+            "name": "Ship_set_sail",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1myadr5"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0zs1x60"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1myadr5",
+            "targetRef": {
+                "$type": "bpmn:Task",
+                "id": "Activity_1qb30d6",
+                "name": "Ship_set_sail"
+            }
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_0sltmku",
+            "name": "Receiver_received",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0ktkpse"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0iupahs"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:Task",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_19dokas",
+            "name": "Inform_receiver",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0zs1x60"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0ktkpse"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0zs1x60",
+            "targetRef": {
+                "$type": "bpmn:Task",
+                "id": "Activity_19dokas",
+                "name": "Inform_receiver"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0ktkpse",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_0sltmku",
+                "name": "Receiver_received"
+            }
+        },
+        {
+            "$type": "bpmn:EndEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_17m30y1",
+            "name": "Shipment_finished",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0iupahs"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0iupahs",
+            "targetRef": {
+                "$type": "bpmn:EndEvent",
+                "id": "Event_17m30y1",
+                "name": "Shipment_finished"
+            }
+        },
+        {
+            "$type": "bpmn:ExclusiveGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_0052v9k",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1kq1ytq"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0fby5zh"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1oteoyw",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "customs_passed == true"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0fby5zh",
+            "targetRef": {
+                "$type": "bpmn:EndEvent",
+                "id": "Event_0os0wzu",
+                "name": "Shipment_failed",
+                "eventDefinitions": [
+                    {
+                        "$type": "bpmn:MessageEventDefinition",
+                        "id": "MessageEventDefinition_13lzn6n"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1kq1ytq",
+            "targetRef": {
+                "$type": "bpmn:ExclusiveGateway",
+                "id": "Gateway_0052v9k"
+            }
+        }
+    ]
+}

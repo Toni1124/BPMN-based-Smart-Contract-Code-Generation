@@ -1,0 +1,1103 @@
+{
+    "$type": "bpmn:Process",
+    "id": "null",
+    "name": "null",
+    "$parent": {
+        "$type": "bpmn:Definitions",
+        "id": "diagram_null"
+    },
+    "flowElements": [
+        {
+            "$type": "bpmn:StartEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_0ldb2rw",
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_10m8tv8"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_1hlt2li",
+            "name": "Submit_Application",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_10m8tv8"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1ee8nac"
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_0uai9vq",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_170lju0",
+                        "name": "candidate_resume",
+                        "collectionList": "[{\"dataType\":\"string\",\"dataName\":\"name\",\"defaultValue\":\"\",\"elementType\":\"\",\"arrayLength\":\"\",\"structType\":\"\",\"definedStruct\":false,\"isEdit\":false},{\"dataType\":\"bytes\",\"dataName\":\"intro\",\"defaultValue\":\"\",\"elementType\":\"\",\"arrayLength\":\"\",\"structType\":\"\",\"definedStruct\":false,\"isEdit\":false}]",
+                        "structType": "Resume"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_10m8tv8",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_1hlt2li",
+                "name": "Submit_Application",
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_0uai9vq"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_170lju0",
+            "name": "candidate_resume",
+            "collectionList": [
+                {
+                    "dataType": "string",
+                    "dataName": "name",
+                    "defaultValue": "",
+                    "elementType": "",
+                    "arrayLength": "",
+                    "structType": "",
+                    "definedStruct": false,
+                    "isEdit": false
+                },
+                {
+                    "dataType": "bytes",
+                    "dataName": "intro",
+                    "defaultValue": "",
+                    "elementType": "",
+                    "arrayLength": "",
+                    "structType": "",
+                    "definedStruct": false,
+                    "isEdit": false
+                }
+            ],
+            "structType": "Resume"
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_0jwnzku"
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1ee8nac",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_0v1du56",
+                "name": "Receive_Application",
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_056cwsq"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_0v1du56",
+            "name": "Receive_Application",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1ee8nac"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1gfta8a"
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_056cwsq",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_0lpcp7g",
+                        "name": "interview_decision",
+                        "dataType": "bool",
+                        "defaultValue": "false"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_0lpcp7g",
+            "name": "interview_decision",
+            "dataType": "bool",
+            "defaultValue": "false"
+        },
+        {
+            "$type": "bpmn:ExclusiveGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_0ce91bt",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1gfta8a"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1x7wwe1"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1pd512i",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "interview_decision==true"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1gfta8a",
+            "targetRef": {
+                "$type": "bpmn:ExclusiveGateway",
+                "id": "Gateway_0ce91bt"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1x7wwe1",
+            "targetRef": {
+                "$type": "bpmn:EndEvent",
+                "id": "Event_1rrwg49",
+                "name": "",
+                "properties": [
+                    {
+                        "$type": "bpmn:Property",
+                        "id": "Property_15fzd9b",
+                        "name": "__targetRef_placeholder"
+                    }
+                ],
+                "dataInputAssociations": [
+                    {
+                        "$type": "bpmn:DataInputAssociation",
+                        "id": "DataInputAssociation_1oo57aa"
+                    }
+                ],
+                "eventDefinitions": [
+                    {
+                        "$type": "bpmn:MessageEventDefinition",
+                        "id": "MessageEventDefinition_0gduu5r"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1pd512i",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_129h9gd",
+                "name": "Schedule_Interview"
+            }
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_129h9gd",
+            "name": "Schedule_Interview",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1pd512i",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "interview_decision==true"
+                    }
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0kcep9o"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:EndEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_1rrwg49",
+            "name": "",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1x7wwe1"
+                }
+            ],
+            "eventDefinitions": [
+                {
+                    "$type": "bpmn:MessageEventDefinition",
+                    "id": "MessageEventDefinition_0gduu5r"
+                }
+            ],
+            "dataInputAssociations": [
+                {
+                    "$type": "bpmn:DataInputAssociation",
+                    "id": "DataInputAssociation_1oo57aa",
+                    "sourceRef": [
+                        {
+                            "$type": "bpmn:DataObjectReference",
+                            "id": "DataObjectReference_0itpeht",
+                            "name": "rejection",
+                            "dataType": "string",
+                            "defaultValue": "\"Application_rejected\""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_0itpeht",
+            "name": "rejection",
+            "dataType": "string",
+            "defaultValue": "\"Application_rejected\""
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0kcep9o",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_1amevbe",
+                "name": "Attend_HR_Interview",
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_05pvznt"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_1amevbe",
+            "name": "Attend_HR_Interview",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0kcep9o"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0xkh879"
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_05pvznt",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_02qbfu1",
+                        "name": "hr_interview_Performance",
+                        "dataType": "string"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_07up1ss",
+            "name": "hr_interview_decision",
+            "dataType": "bool",
+            "defaultValue": "false"
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_09ukh6e",
+            "name": "HR_Evaluate_Candidate",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0xkh879"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1efmlep"
+                }
+            ],
+            "dataInputAssociations": [
+                {
+                    "$type": "bpmn:DataInputAssociation",
+                    "id": "DataInputAssociation_0nlvge7",
+                    "sourceRef": [
+                        {
+                            "$type": "bpmn:DataObjectReference",
+                            "id": "DataObjectReference_02qbfu1",
+                            "name": "hr_interview_Performance",
+                            "dataType": "string"
+                        }
+                    ]
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_0v1rmok",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_07up1ss",
+                        "name": "hr_interview_decision",
+                        "dataType": "bool",
+                        "defaultValue": "false"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0xkh879",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_09ukh6e",
+                "name": "HR_Evaluate_Candidate",
+                "properties": [
+                    {
+                        "$type": "bpmn:Property",
+                        "id": "Property_1uaenjj",
+                        "name": "__targetRef_placeholder"
+                    }
+                ],
+                "dataInputAssociations": [
+                    {
+                        "$type": "bpmn:DataInputAssociation",
+                        "id": "DataInputAssociation_0nlvge7"
+                    }
+                ],
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_0v1rmok"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:ExclusiveGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_0viuavz",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1efmlep"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1pp16xr"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_16skgr8",
+                    "name": "",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "hr_interview_decision==true"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1efmlep",
+            "targetRef": {
+                "$type": "bpmn:ExclusiveGateway",
+                "id": "Gateway_0viuavz"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1pp16xr",
+            "targetRef": {
+                "$type": "bpmn:EndEvent",
+                "id": "Event_09v08wj",
+                "properties": [
+                    {
+                        "$type": "bpmn:Property",
+                        "id": "Property_0ttnnu7",
+                        "name": "__targetRef_placeholder"
+                    }
+                ],
+                "dataInputAssociations": [
+                    {
+                        "$type": "bpmn:DataInputAssociation",
+                        "id": "DataInputAssociation_09b1i3c"
+                    }
+                ],
+                "eventDefinitions": [
+                    {
+                        "$type": "bpmn:MessageEventDefinition",
+                        "id": "MessageEventDefinition_18xbke1"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_0i5d5oy",
+            "name": "Schedule_Manager_Interview",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_16skgr8",
+                    "name": "",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "hr_interview_decision==true"
+                    }
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_042injs"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_16skgr8",
+            "name": "",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_0i5d5oy",
+                "name": "Schedule_Manager_Interview"
+            }
+        },
+        {
+            "$type": "bpmn:EndEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_09v08wj",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1pp16xr"
+                }
+            ],
+            "eventDefinitions": [
+                {
+                    "$type": "bpmn:MessageEventDefinition",
+                    "id": "MessageEventDefinition_18xbke1"
+                }
+            ],
+            "dataInputAssociations": [
+                {
+                    "$type": "bpmn:DataInputAssociation",
+                    "id": "DataInputAssociation_09b1i3c",
+                    "sourceRef": [
+                        {
+                            "$type": "bpmn:DataObjectReference",
+                            "id": "DataObjectReference_0itpeht",
+                            "name": "rejection",
+                            "dataType": "string",
+                            "defaultValue": "\"Application_rejected\""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_0gnf4by",
+            "name": "Attend_Manager_Interview",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_042injs"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1093q4h"
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_05v8h9o",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_0vye85a",
+                        "name": "manager_Interview_Performance",
+                        "dataType": "string"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_02qbfu1",
+            "name": "hr_interview_Performance",
+            "dataType": "string"
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_0vye85a",
+            "name": "manager_Interview_Performance",
+            "dataType": "string"
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_09s6ylb",
+            "name": "Manager_Interview_Candidate",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1093q4h"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1mwtxiv"
+                }
+            ],
+            "dataInputAssociations": [
+                {
+                    "$type": "bpmn:DataInputAssociation",
+                    "id": "DataInputAssociation_1wzpx7e",
+                    "sourceRef": [
+                        {
+                            "$type": "bpmn:DataObjectReference",
+                            "id": "DataObjectReference_0vye85a",
+                            "name": "manager_Interview_Performance",
+                            "dataType": "string"
+                        }
+                    ]
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_0lzu4nv",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_0hbpatk",
+                        "name": "manager_interview_decision",
+                        "dataType": "bool",
+                        "defaultValue": "false"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_0hbpatk",
+            "name": "manager_interview_decision",
+            "dataType": "bool",
+            "defaultValue": "false"
+        },
+        {
+            "$type": "bpmn:ExclusiveGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_1yz1fsn",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1mwtxiv"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0r4105e"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0c32ed6",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "manager_interview_decision==true"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1mwtxiv",
+            "targetRef": {
+                "$type": "bpmn:ExclusiveGateway",
+                "id": "Gateway_1yz1fsn"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0r4105e",
+            "targetRef": {
+                "$type": "bpmn:EndEvent",
+                "id": "Event_1rl1pem",
+                "properties": [
+                    {
+                        "$type": "bpmn:Property",
+                        "id": "Property_09t3y3i",
+                        "name": "__targetRef_placeholder"
+                    }
+                ],
+                "dataInputAssociations": [
+                    {
+                        "$type": "bpmn:DataInputAssociation",
+                        "id": "DataInputAssociation_0c3bxpa"
+                    }
+                ],
+                "eventDefinitions": [
+                    {
+                        "$type": "bpmn:MessageEventDefinition",
+                        "id": "MessageEventDefinition_044oc26"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:EndEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_1rl1pem",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0r4105e"
+                }
+            ],
+            "eventDefinitions": [
+                {
+                    "$type": "bpmn:MessageEventDefinition",
+                    "id": "MessageEventDefinition_044oc26"
+                }
+            ],
+            "dataInputAssociations": [
+                {
+                    "$type": "bpmn:DataInputAssociation",
+                    "id": "DataInputAssociation_0c3bxpa",
+                    "sourceRef": [
+                        {
+                            "$type": "bpmn:DataObjectReference",
+                            "id": "DataObjectReference_1jmt6ic",
+                            "name": "rejection",
+                            "dataType": "string",
+                            "defaultValue": "\"Application_rejected\""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_1jmt6ic",
+            "name": "rejection",
+            "dataType": "string",
+            "defaultValue": "\"Application_rejected\""
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0c32ed6",
+            "targetRef": {
+                "$type": "bpmn:EndEvent",
+                "id": "Event_0d8unes",
+                "properties": [
+                    {
+                        "$type": "bpmn:Property",
+                        "id": "Property_1u6mb4n",
+                        "name": "__targetRef_placeholder"
+                    }
+                ],
+                "dataInputAssociations": [
+                    {
+                        "$type": "bpmn:DataInputAssociation",
+                        "id": "DataInputAssociation_1w1mfqv"
+                    }
+                ],
+                "eventDefinitions": [
+                    {
+                        "$type": "bpmn:MessageEventDefinition",
+                        "id": "MessageEventDefinition_0imsx9q"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:EndEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_0d8unes",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0c32ed6",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "manager_interview_decision==true"
+                    }
+                }
+            ],
+            "eventDefinitions": [
+                {
+                    "$type": "bpmn:MessageEventDefinition",
+                    "id": "MessageEventDefinition_0imsx9q"
+                }
+            ],
+            "dataInputAssociations": [
+                {
+                    "$type": "bpmn:DataInputAssociation",
+                    "id": "DataInputAssociation_1w1mfqv",
+                    "sourceRef": [
+                        {
+                            "$type": "bpmn:DataObjectReference",
+                            "id": "DataObjectReference_1icd7y0",
+                            "name": "acception",
+                            "dataType": "string",
+                            "defaultValue": "\"Application_accepted\""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_1icd7y0",
+            "name": "acception",
+            "dataType": "string",
+            "defaultValue": "\"Application_accepted\""
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_04eqph4"
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_0zkh78d"
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_0tyyra9"
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_1aplfvb"
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_042injs",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_0gnf4by",
+                "name": "Attend_Manager_Interview",
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_05v8h9o"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1093q4h",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_09s6ylb",
+                "name": "Manager_Interview_Candidate",
+                "properties": [
+                    {
+                        "$type": "bpmn:Property",
+                        "id": "Property_0u7wt18",
+                        "name": "__targetRef_placeholder"
+                    }
+                ],
+                "dataInputAssociations": [
+                    {
+                        "$type": "bpmn:DataInputAssociation",
+                        "id": "DataInputAssociation_1wzpx7e"
+                    }
+                ],
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_0lzu4nv"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_04o6ztl"
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_0dnb5xr"
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_0udvzte"
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_12fssjm"
+        }
+    ]
+}

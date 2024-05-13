@@ -1,0 +1,738 @@
+{
+    "$type": "bpmn:Process",
+    "id": "null",
+    "name": "null",
+    "$parent": {
+        "$type": "bpmn:Definitions",
+        "id": "diagram_null"
+    },
+    "flowElements": [
+        {
+            "$type": "bpmn:StartEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_1o5xpgx",
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_11dyirt"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_09x7eu5",
+            "name": "order_info",
+            "collectionList": [
+                {
+                    "dataType": "string",
+                    "dataName": "good_name",
+                    "defaultValue": "",
+                    "elementType": "",
+                    "arrayLength": "",
+                    "structType": "",
+                    "definedStruct": false,
+                    "isEdit": false
+                },
+                {
+                    "dataType": "uint",
+                    "dataName": "quantity",
+                    "defaultValue": "",
+                    "elementType": "",
+                    "arrayLength": "",
+                    "structType": "",
+                    "definedStruct": false,
+                    "isEdit": false
+                }
+            ],
+            "structType": "Order_table"
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_0va6hm7",
+            "name": "Order_Goods",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_11dyirt"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0dxbgai"
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_1kzykea",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_09x7eu5",
+                        "name": "order_info",
+                        "collectionList": "[{\"dataType\":\"string\",\"dataName\":\"good_name\",\"defaultValue\":\"\",\"elementType\":\"\",\"arrayLength\":\"\",\"structType\":\"\",\"definedStruct\":false,\"isEdit\":false},{\"dataType\":\"uint\",\"dataName\":\"quantity\",\"defaultValue\":\"\",\"elementType\":\"\",\"arrayLength\":\"\",\"structType\":\"\",\"definedStruct\":false,\"isEdit\":false}]",
+                        "structType": "Order_table"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_11dyirt",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_0va6hm7",
+                "name": "Order_Goods",
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_1kzykea"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_1mtp4kx"
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_042ok61",
+            "name": "Approve_order",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_07dkh7g"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0lcp4q5"
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_130x0gw",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_1hjuz9x",
+                        "name": "approve",
+                        "dataType": "bool",
+                        "defaultValue": "true"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_07dkh7g",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_042ok61",
+                "name": "Approve_order",
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_130x0gw"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0dxbgai",
+            "targetRef": {
+                "$type": "bpmn:ParallelGateway",
+                "id": "Gateway_1xvyoq4"
+            }
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_1hjuz9x",
+            "name": "approve",
+            "dataType": "bool",
+            "defaultValue": "true"
+        },
+        {
+            "$type": "bpmn:ParallelGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_1xvyoq4",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0dxbgai"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1dw5or3"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_01tdgf0"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:IntermediateThrowEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_07dwn0z",
+            "name": "Order_approved",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1cegk0j",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "approve == true"
+                    }
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1ekwaje"
+                }
+            ],
+            "eventDefinitions": [
+                {
+                    "$type": "bpmn:MessageEventDefinition",
+                    "id": "MessageEventDefinition_0kn09wl"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:ExclusiveGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_1buqfsf",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0lcp4q5"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1cegk0j",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "approve == true"
+                    }
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1nmibyk"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0lcp4q5",
+            "targetRef": {
+                "$type": "bpmn:ExclusiveGateway",
+                "id": "Gateway_1buqfsf"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1cegk0j",
+            "targetRef": {
+                "$type": "bpmn:IntermediateThrowEvent",
+                "id": "Event_07dwn0z",
+                "name": "Order_approved",
+                "eventDefinitions": [
+                    {
+                        "$type": "bpmn:MessageEventDefinition",
+                        "id": "MessageEventDefinition_0kn09wl"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1nmibyk",
+            "targetRef": {
+                "$type": "bpmn:EndEvent",
+                "id": "Event_1svc6nt",
+                "name": "Order_declined",
+                "eventDefinitions": [
+                    {
+                        "$type": "bpmn:MessageEventDefinition",
+                        "id": "MessageEventDefinition_1lqtrfw"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:IntermediateThrowEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_0ma3mbe",
+            "name": "Order_received",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1dw5or3"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_07dkh7g"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1dw5or3",
+            "targetRef": {
+                "$type": "bpmn:IntermediateThrowEvent",
+                "id": "Event_0ma3mbe",
+                "name": "Order_received"
+            }
+        },
+        {
+            "$type": "bpmn:ParallelGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_1a8afmy",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1r6wnwr"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0u5jcnk"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0hryko6"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:Task",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_1h6uj8j",
+            "name": "Deliver_goods",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1ekwaje"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1r6wnwr"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1ekwaje",
+            "targetRef": {
+                "$type": "bpmn:Task",
+                "id": "Activity_1h6uj8j",
+                "name": "Deliver_goods"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1r6wnwr",
+            "targetRef": {
+                "$type": "bpmn:ParallelGateway",
+                "id": "Gateway_1a8afmy"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0hryko6",
+            "targetRef": {
+                "$type": "bpmn:EndEvent",
+                "id": "Event_0k174q2",
+                "name": "Received_goods",
+                "eventDefinitions": [
+                    {
+                        "$type": "bpmn:MessageEventDefinition",
+                        "id": "MessageEventDefinition_06cszab"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:UserTask",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Activity_07gia3i",
+            "name": "Pay_for_goods",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_01tdgf0"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0nqybf0"
+                }
+            ],
+            "dataOutputAssociations": [
+                {
+                    "$type": "bpmn:DataOutputAssociation",
+                    "id": "DataOutputAssociation_0u8wjh4",
+                    "targetRef": {
+                        "$type": "bpmn:DataObjectReference",
+                        "id": "DataObjectReference_1yzjpvq",
+                        "name": "pay",
+                        "dataType": "bool",
+                        "defaultValue": "true"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_01tdgf0",
+            "targetRef": {
+                "$type": "bpmn:UserTask",
+                "id": "Activity_07gia3i",
+                "name": "Pay_for_goods",
+                "dataOutputAssociations": [
+                    {
+                        "$type": "bpmn:DataOutputAssociation",
+                        "id": "DataOutputAssociation_0u8wjh4"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:EndEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_1svc6nt",
+            "name": "Order_declined",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1nmibyk"
+                }
+            ],
+            "eventDefinitions": [
+                {
+                    "$type": "bpmn:MessageEventDefinition",
+                    "id": "MessageEventDefinition_1lqtrfw"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:DataObjectReference",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObjectReference_1yzjpvq",
+            "name": "pay",
+            "dataType": "bool",
+            "defaultValue": "true"
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_143ctx8"
+        },
+        {
+            "$type": "bpmn:ExclusiveGateway",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Gateway_1nu9dol",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0nqybf0"
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0lk0vaw"
+                },
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1ekv3y7",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "pay == true"
+                    }
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0nqybf0",
+            "targetRef": {
+                "$type": "bpmn:ExclusiveGateway",
+                "id": "Gateway_1nu9dol"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0lk0vaw",
+            "targetRef": {
+                "$type": "bpmn:EndEvent",
+                "id": "Event_1yeq6m2",
+                "name": "Order_declined",
+                "eventDefinitions": [
+                    {
+                        "$type": "bpmn:MessageEventDefinition",
+                        "id": "MessageEventDefinition_0usscfb"
+                    }
+                ]
+            }
+        },
+        {
+            "$type": "bpmn:EndEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_1yeq6m2",
+            "name": "Order_declined",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0lk0vaw"
+                }
+            ],
+            "eventDefinitions": [
+                {
+                    "$type": "bpmn:MessageEventDefinition",
+                    "id": "MessageEventDefinition_0usscfb"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:DataObject",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "DataObject_0282y7e"
+        },
+        {
+            "$type": "bpmn:IntermediateThrowEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_1hsvm4c",
+            "name": "Wait_for_goods",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_1ekv3y7",
+                    "conditionExpression": {
+                        "$type": "bpmn:FormalExpression",
+                        "body": "pay == true"
+                    }
+                }
+            ],
+            "outgoing": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0u5jcnk"
+                }
+            ]
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_1ekv3y7",
+            "targetRef": {
+                "$type": "bpmn:IntermediateThrowEvent",
+                "id": "Event_1hsvm4c",
+                "name": "Wait_for_goods"
+            }
+        },
+        {
+            "$type": "bpmn:SequenceFlow",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Flow_0u5jcnk",
+            "targetRef": {
+                "$type": "bpmn:ParallelGateway",
+                "id": "Gateway_1a8afmy"
+            }
+        },
+        {
+            "$type": "bpmn:EndEvent",
+            "$parent": {
+                "$type": "bpmn:Process",
+                "name": "null",
+                "id": "null"
+            },
+            "id": "Event_0k174q2",
+            "name": "Received_goods",
+            "incoming": [
+                {
+                    "$type": "bpmn:SequenceFlow",
+                    "id": "Flow_0hryko6"
+                }
+            ],
+            "eventDefinitions": [
+                {
+                    "$type": "bpmn:MessageEventDefinition",
+                    "id": "MessageEventDefinition_06cszab"
+                }
+            ]
+        }
+    ]
+}
